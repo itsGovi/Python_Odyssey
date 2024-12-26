@@ -39,14 +39,3 @@ This repository documents my learning path, featuring a collection of Python pro
   * Portfolio Optimizer with ML
 
 **Join me on this exciting journey as I learn, grow, and build a strong foundation in Python and its applications.**
-
-**This description highlights:**
-
-* **The purpose of the repository:** Learning and showcasing Python skills.
-* **Key features:** Phased approach, real-world projects, hands-on learning.
-* **Target audience:** Data scientists, developers, and anyone interested in Python and trading.
-* **Call to action:** Invites others to join the learning journey.
-
-I hope this description effectively captures the essence of your project! Feel free to adapt it further to match your specific goals and interests.
-
-Let me know if you'd like to brainstorm ideas for the "Dynamic Budget Planner" project

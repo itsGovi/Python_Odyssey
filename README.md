@@ -1,6 +1,6 @@
 # Python Project Odyssey
 
-Welcome to the **Python Project Odyssey** – a comprehensive journey of 20-25 projects designed to transform you from a beginner to an advanced Python programmer, with a strong foundation in machine learning, AI/ML, and algorithmic trading. This repository includes a series of real-world projects that build upon each other, giving you the skills to tackle complex problems and adapt to the rapidly evolving world of technology. 
+Welcome to the **Python Project Odyssey** – a comprehensive journey of 20-25 projects designed to transform you from a beginner to an advanced Python programmer, with a strong foundation in machine learning, AI/ML, and algorithmic trading. This repository includes a series of real-world projects that build upon each other, giving you the skills to tackle complex problems and adapt to the rapidly evolving world of technology.
 
 ## Overview
 
@@ -9,6 +9,7 @@ The goal of this project series is to help you understand the **"why"** behind a
 ## Project Phases
 
 ### **Phase 1: Core Programming Foundations (5 Projects)**
+
 **Objective:** Gain mastery over Python, problem-solving, and core computational thinking.
 
 1. **Dynamic Expense Tracker** - Learn file handling, modular programming, and error handling.
@@ -18,6 +19,7 @@ The goal of this project series is to help you understand the **"why"** behind a
 5. **Personal Task Automator** - Integrate Python with external systems using APIs.
 
 ### **Phase 2: Intermediate Programming Concepts (5 Projects)**
+
 **Objective:** Strengthen problem-solving with more advanced use cases.
 
 6. **Interactive Recommendation System** - Lay groundwork for understanding algorithms like KNN.
@@ -27,6 +29,7 @@ The goal of this project series is to help you understand the **"why"** behind a
 10. **Version Control System Simulator** - Deepen understanding of version control principles.
 
 ### **Phase 3: AI/ML Foundations (5 Projects)**
+
 **Objective:** Build familiarity with AI/ML libraries, mathematical concepts, and pipelines.
 
 11. **Spam Classifier** - Build an ML model using logistic regression and text preprocessing.
@@ -36,6 +39,7 @@ The goal of this project series is to help you understand the **"why"** behind a
 15. **Model Deployment Framework** - Learn to deploy ML models using Flask/Django and MLOps principles.
 
 ### **Phase 4: Advanced Specialization (5-10 Projects)**
+
 **Objective:** Dive into algorithmic trading, AI/ML, and complex systems.
 
 16. **Quantitative Strategy Simulator** - Backtest trading strategies using advanced statistical analysis.
@@ -46,7 +50,19 @@ The goal of this project series is to help you understand the **"why"** behind a
 21. **Dynamic Knowledge Graph Generator** - Develop expertise in graph databases and dynamic visualization.
 
 ## What You'll Learn
+
 - **Core Programming Skills**: Strong foundations in Python syntax, problem-solving, data structures, and algorithms.
 - **Machine Learning & AI**: Deep understanding of machine learning algorithms, NLP, neural networks, and deployment practices.
 - **Algorithmic Trading**: Learn the principles and practices of algorithmic trading, portfolio backtesting, and high-frequency trading.
 - **Real-World Applications**: Solve problems that require integrating external APIs, data processing, and algorithm optimization.
+
+---
+
+## The prompt
+
+well, I want to build the 1st project, and I want you to help me.
+What I'm aiming for:
+I'M TRYING TO "LEARN TO THINK" AS HOW A PROGRAMMER WITH A CREATIVE MIND WOULD DO, I NEED TO ARRIVE AT THE SOLUTION ON MY OWN, BE THE COMPASS THAT GUIDES ME NOT THE MAP THAT JUST TAKES ME TO THE END!
+How I want you to help me:
+
+rather than your using words (plain english) or handing me the solution code, I need you to find a similar case(scenario/question/problem-statement) to use a similar solution and break-it-down. So, I could write code my own way understanding your lesson and become the 'leonardo da vince' in programming, by the end of this road (finishing all the projects) I should be able to write programs from pseudo-code to clean code just as a person can speak his mother tongue (say "English" the way I can clearly communicate my end goal to you).

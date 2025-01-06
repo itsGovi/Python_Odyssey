@@ -56,8 +56,6 @@ The goal of this project series is to help you understand the **"why"** behind a
 - **Algorithmic Trading**: Learn the principles and practices of algorithmic trading, portfolio backtesting, and high-frequency trading.
 - **Real-World Applications**: Solve problems that require integrating external APIs, data processing, and algorithm optimization.
 
----
-
 ## The prompt
 
 well, I want to build the 1st project, and I want you to help me.

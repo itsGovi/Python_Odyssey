@@ -22,7 +22,7 @@ def read_json(file_path):
         return {}
 
 def write_json(file_path, data):
-    data_dir = os.path.exists(file_path)
+    data_dir = os.path.dirname(file_path)
     if not os.path.exists(file_path):
         os.makedirs(data_dir, exist_ok=True)
 

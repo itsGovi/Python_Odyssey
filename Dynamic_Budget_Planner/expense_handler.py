@@ -5,3 +5,4 @@ Contains functions for core operations like:
     Filtering or summarizing expenses.
 Makes the code modular and reusable.
 """
+

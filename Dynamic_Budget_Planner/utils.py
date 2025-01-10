@@ -24,3 +24,14 @@ def is_valid_date(date_str, date_format="%Y-%m-%d"):
         return str(e)
     except TypeError as e:
         return str(e)
+
+ALLOWED_CATEGORIES = ["food", "housing", "transportation", "entertainment", "utilities", "other"]
+
+def is_valid_category(category):
+    if isinstance(category, str):
+        return category.strip().lower() in ALLOWED_CATEGORIES
+    elif isinstance(category, int):
+        return 1 <= category >= len(ALLOWED_CATEGORIES)
+    else:
+        print("Invalid category type")
+        return False

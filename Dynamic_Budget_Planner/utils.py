@@ -13,25 +13,34 @@ def is_valid_amount(amount):
     """
     return isinstance(amount, (int, float)) and amount > 0 #we use `isinstance` to check if the input is even a no.?
 
-def is_valid_date(date_str, date_format="%Y-%m-%d"):
+def is_valid_date(date_str):
     try:
-        date_obj = datetime.strptime(date_str, date_format)
+        date_obj = datetime.strptime(date_str, "%d-%m-%Y")
         if date_obj > datetime.now():
-            print(f"Cannot take future date's!")
+            print(f"Cannot take future date's! - {date_obj}")
             return False
         return True
     except ValueError as e:
-        return str(e)
+        return False
     except TypeError as e:
-        return str(e)
+        return False
 
-ALLOWED_CATEGORIES = ["food", "housing", "transportation", "entertainment", "utilities", "other"]
 
-def is_valid_category(category):
+def is_valid_category(category, alllowed_categories=None):
+    if alllowed_categories is None:
+        alllowed_categories = ["food", "housing", "transportation", "entertainment", "utilities", "other"]
     if isinstance(category, str):
-        return category.strip().lower() in ALLOWED_CATEGORIES
+        return category.strip().lower() in alllowed_categories
     elif isinstance(category, int):
-        return 1 <= category >= len(ALLOWED_CATEGORIES)
+        return 1 <= category >= len(alllowed_categories)
     else:
         print("Invalid category type")
         return False
+    
+if __name__ == "__main__":
+    print(is_valid_amount(100))  # Should return True
+    print(is_valid_amount(-50)) # Should return False
+    print(is_valid_date("2024-12-22"))  # Should return True
+    print(is_valid_date("22-12-2024"))  # Should return False
+    print(is_valid_category("Food", ["Food", "Transport", "Utilities"]))  # Should return True
+    print(is_valid_category("Entertainment", ["Food", "Transport"]))    # Should return False

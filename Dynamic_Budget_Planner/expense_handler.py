@@ -19,6 +19,6 @@ class ExpenseEntry():
         
         # Assigning values only after validation
         self.amount = amount
-        self.date = date
+        self.date = date 
         self.category = category
         

@@ -22,3 +22,17 @@ class ExpenseEntry():
         self.date = date 
         self.category = category
         
+class ExpenseManager():
+    def __init__(self):
+        self.expenses = []
+        
+    def add_expense(self, expense):
+        if isinstance(expense, ExpenseEntry):
+            self.expenses.append(expense)
+        else:
+            raise ValueError("Invalid expense entry!")
+        
+# Example
+exp_entry = ExpenseManager()
+expense1 = ExpenseEntry(500, "food", "10-11-2023")  # Valid date (assuming today's date is past 10-11-2023)
+exp_entry.add_expense(expense1)

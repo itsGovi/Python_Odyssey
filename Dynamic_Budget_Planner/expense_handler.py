@@ -6,17 +6,21 @@ Contains functions for core operations like:
 Makes the code modular and reusable.
 """
 
-from utils import is_valid_amount, is_valid_category, is_valid_date
+from utils import is_valid_amount, is_valid_category, is_valid_date, is_valid_description
+import uuid
 
 class ExpenseEntry():
-    def __init__(self, amount, category, date):
+    def __init__(self, amount, category, date, id, description):
         if not is_valid_amount(amount):
             raise ValueError("Invalid input error! Amount must be +ve")
         if not is_valid_date(date):
             raise ValueError("Invalid date error! Please provide a valid date in MM-DD-YYYY format.")
+        if not is_valid_description(description):
+            raise ValueError("Description can't be empty")
         if not is_valid_category(category):
             raise ValueError("Invalid category error! Category not allowed")
-        
+        self.id = uuid.uuid4() # Generating a unique id for each datapoint
+
         # Assigning values only after validation
         self.amount = amount
         self.date = date 
@@ -32,7 +36,25 @@ class ExpenseManager():
         else:
             raise ValueError("Invalid expense entry!")
         
-# Example
-exp_entry = ExpenseManager()
-expense1 = ExpenseEntry(500, "food", "10-11-2023")  # Valid date (assuming today's date is past 10-11-2023)
-exp_entry.add_expense(expense1)
+    def update_expense(self, expense_id, **kwargs):
+        for expense in self.expenses:
+            if expense.id == expense_id:
+                for key, value in kwargs.items():
+                    if key == "amount":
+                        is_valid = is_valid_amount(value)
+                    elif key == "category":
+                        is_valid = is_valid_category(value)
+                    elif key == "date":
+                        is_valid = is_valid_date(value)
+                    elif key == "description":
+                        is_valid = is_valid_description(value)
+                    else:
+                        raise ValueError("Invalid attritube: {key}") # Handling invalid keys
+                    
+                    if is_valid:
+                        setattr(expense, key, value)
+                    else:
+                        raise ValueError(f"Invalid {key}: {value}")
+                return # existing the loop after updating
+
+        raise ValueError("Expense not found")

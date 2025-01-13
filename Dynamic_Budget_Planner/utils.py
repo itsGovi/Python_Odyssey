@@ -36,7 +36,10 @@ def is_valid_category(category, alllowed_categories=None):
     else:
         print("Invalid category type")
         return False
-    
+
+def is_valid_description(description):
+    return isinstance(description, str) and description.strip != "" #checking it's not empty
+
 if __name__ == "__main__":
     print(is_valid_amount(100))  # Should return True
     print(is_valid_amount(-50)) # Should return False

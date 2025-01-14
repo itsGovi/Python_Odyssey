@@ -58,3 +58,28 @@ class ExpenseManager():
                 return # existing the loop after updating
 
         raise ValueError("Expense not found")
+    
+    def delete_expense(self, expense_id, delete_all=True, arrtibutes_to_delete=None):
+        for expense in self.expenses:
+            if expense.id == expense_id:
+                if 0 <= expense_id <= len(self.expenses):
+                    expense = self.expenses[expense_id]
+                    
+                    if delete_all:
+                        self.expenses.pop(expense)
+                        print(f"Deleted expense {expense_id}!")
+                    else:
+                        if arrtibutes_to_delete:
+                            for attr_name, new_value in arrtibutes_to_delete:
+                                if attr_name == "1":
+                                    # amount
+                                    ...
+                                elif attr_name == '2':
+                                    # category
+                                    ...
+                                elif attr_name == '3':
+                                    # date
+                                    ...
+                                elif attr_name == '4':
+                                    # description
+                                    ...

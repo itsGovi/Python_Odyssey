@@ -17,3 +17,6 @@ while True:
             print("Invalid choice. Please enter a number between 1 and 4.")
     except ValueError:
         print("Invalid input. Please enter a number!")
+        
+    if choice == ['1', 'add expense'.lower()]:
+        

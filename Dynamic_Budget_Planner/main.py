@@ -4,6 +4,7 @@ Example: Display menu options like "Add Expense" or "View Expenses" and call the
 """
 
 from utils import is_valid_amount, is_valid_category, is_valid_date, is_valid_description
+from expense_handler import ExpenseEntry
 
 while True:
     print("\nHello, what are you here for?")
@@ -21,6 +22,47 @@ while True:
     except ValueError:
         print("Invalid input. Please enter a number!")
         
-    if choice == ['1', 'add expense'.lower()]:
-        amt_input = input(int("Amount: "))
-        
+    validate_data = {}
+
+    questions = {
+        "amount": "Enter the amount: ",
+        "category": "Enter the category: ",
+        "date": "Enter the date (DD-MM-YYYY): ",
+        "description": "Enter a brief description: "
+    }
+
+    # loop through each field input and validating it
+    for key, question in questions.items():
+        while True:
+            user_input = input(question)
+            if key == 'amount':
+                if is_valid_amount(user_input):
+                    validate_data[key] = float(user_input) # format and store
+                    break
+                else:
+                    print("Invalid amount. Please enter a +ve number!")
+            
+            elif key == 'category':
+                if is_valid_category(user_input):
+                    validate_data[key] = user_input.strip().lower() # normalize the input
+                    break
+                else:
+                    print("Invalid category. Chooose from the allowed list.")
+                
+            elif key == 'date':
+                if is_valid_date(user_input):
+                    validate_data[key] = user_input
+                    break
+                else:
+                    print("Invalid date. Please use the format DD-MM-YYYY")
+                
+            elif key == 'description':
+                if is_valid_description(user_input):
+                    validate_data[key] = user_input.strip()
+                    break
+                else:
+                    print("Description can't be empty!")
+
+    # Once all are validated, finalize the entry
+    try:
+        new_expense = ExpenseEntry(**validate_data)

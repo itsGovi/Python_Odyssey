@@ -2,6 +2,9 @@
 This is the program's "brain." It handles user input, menu navigation, and calls functions from other files.
 Example: Display menu options like "Add Expense" or "View Expenses" and call the respective function from `expense_handler.py`.
 """
+
+from utils import is_valid_amount, is_valid_category, is_valid_date, is_valid_description
+
 while True:
     print("\nHello, what are you here for?")
     print("1. Add Expense")
@@ -19,4 +22,5 @@ while True:
         print("Invalid input. Please enter a number!")
         
     if choice == ['1', 'add expense'.lower()]:
+        amt_input = input(int("Amount: "))
         

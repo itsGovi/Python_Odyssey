@@ -8,6 +8,7 @@ Makes the code modular and reusable.
 
 from utils import is_valid_amount, is_valid_category, is_valid_date, is_valid_description
 import uuid
+from file_handler import read_json, write_json
 
 class ExpenseEntry():
     def __init__(self, amount, category, date, id, description):
@@ -19,20 +20,33 @@ class ExpenseEntry():
             raise ValueError("Description can't be empty")
         if not is_valid_category(category):
             raise ValueError("Invalid category error! Category not allowed")
-        self.id = uuid.uuid4() # Generating a unique id for each datapoint
 
         # Assigning values only after validation
+        self.id = str(uuid.uuid4()) # Generating a unique id for each datapoint
         self.amount = amount
         self.date = date 
         self.category = category
         
+    def to_dict(self):
+        return vars(self)
+
 class ExpenseManager():
-    def __init__(self):
-        self.expenses = []
-        
+    def __init__(self, file_path = 'data\expenses.json'):
+        self.file_path  = file_path
+        self.expenses = self.load_expenses()
+
+    def load_expenses(self):
+        raw_data = read_json(self.file_path)
+        return [ExpenseEntry(**exp) for exp in raw_data] # converting dict to objs
+    
+    def save_expenses(self):
+        data = [exp.to_dict for exp in self.expenses]
+        write_json(self.file_path, data)
+
     def add_expense(self, expense):
         if isinstance(expense, ExpenseEntry):
             self.expenses.append(expense)
+            self.save_expenses()
         else:
             raise ValueError("Invalid expense entry!")
         

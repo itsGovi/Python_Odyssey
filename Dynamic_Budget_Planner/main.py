@@ -38,3 +38,33 @@ def get_user_input():
     
     return validated_data
 
+def main():
+    manager = ExpenseManager()
+
+    
+    while True:
+        print("\nMenu:")
+        print("1. Add Expense")
+        print("2. View Expenses")
+        print("3. Update Expense")
+        print("4. Delete Expense")
+        print("5. Exit")
+        
+        choice = input("Enter your choice (1-5): ")
+        if choice == "1":
+              data = get_user_input()
+              new_expense = ExpenseEntry(**data)
+              manager.add_expense(new_expense)
+              print("Expense added successfully!")
+        elif choice == "2":
+              for expense in manager.expenses:
+                    print(expense.to_dict())
+        elif choice == '3':
+              print("Update feature coming soon!")
+        elif choice == '4':
+              print('Delete feature coming soon!')
+        elif choice == '5':
+              print("Goodbye!")
+              break
+        else:
+              print("Invalid choice. Try again!")

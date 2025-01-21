@@ -9,6 +9,7 @@ Makes the code modular and reusable.
 from utils import is_valid_amount, is_valid_category, is_valid_date, is_valid_description
 import uuid
 from file_handler import read_json, write_json
+import json
 
 class ExpenseEntry():
     def __init__(self, amount, category, date, id, description):
@@ -50,50 +51,57 @@ class ExpenseManager():
         else:
             raise ValueError("Invalid expense entry!")
         
-    def update_expense(self, expense_id, **kwargs):
-        for expense in self.expenses:
-            if expense.id == expense_id:
-                for key, value in kwargs.items():
-                    if key == "amount":
-                        is_valid = is_valid_amount(value)
-                    elif key == "category":
-                        is_valid = is_valid_category(value)
-                    elif key == "date":
-                        is_valid = is_valid_date(value)
-                    elif key == "description":
-                        is_valid = is_valid_description(value)
-                    else:
-                        raise ValueError("Invalid attritube: {key}") # Handling invalid keys
-                    
-                    if is_valid:
-                        setattr(expense, key, value)
-                    else:
-                        raise ValueError(f"Invalid {key}: {value}")
-                return # existing the loop after updating
+    def get_update_input():
+        expense_id = input("Enter expense_id to update: ")
+        fields_to_update = {}
 
-        raise ValueError("Expense not found")
-    
-    def delete_expense(self, expense_id, delete_all=True, arrtibutes_to_delete=None):
+        print("\n What field(s) do you want to update?")
+        fields = ["1. amount", "2. category", "3. date", "4. description", "5. Cancel Update"]
+        for i in fields:
+            print(i)
+
+        while True:
+            choice = input("What field do you want to change? ")
+            if choice in ['1', 'amount']:
+                new_amount = input(int("Enter new amount "))
+                fields_to_update["amount"] = new_amount
+            elif choice in ['2', 'category']:
+                print("food", "housing", "transportation", "entertainment", "utilities", "other")            
+                new_category = input("Enter new category ")
+                fields_to_update["category"] = new_category
+            elif choice in ['3', 'date']:
+                new_date = input("Enter new date (DD-MM-YYYY) ")
+                fields_to_update["date"] = new_date
+            elif choice in ['4', 'description']:
+                new_description = input("Enter new description ")
+                fields_to_update["description"] = new_description
+            elif choice in ['5', 'cancel update']:
+                print("Update Cancelled")
+                return None, None
+            else:
+                print("Invalid choice. Try again")
+
+            another = input("Update another field? (y/n): ").lower()
+            if another != 'y':
+                break
+        
+        return expense_id, fields_to_update
+
+    def find_expense_by_id(self, expense_id):
         for expense in self.expenses:
             if expense.id == expense_id:
-                if 0 <= expense_id <= len(self.expenses):
-                    expense = self.expenses[expense_id]
-                    
-                    if delete_all:
-                        self.expenses.pop(expense)
-                        print(f"Deleted expense {expense_id}!")
-                    else:
-                        if arrtibutes_to_delete:
-                            for attr_name, new_value in arrtibutes_to_delete:
-                                if attr_name == "1":
-                                    # amount
-                                    ...
-                                elif attr_name == '2':
-                                    # category
-                                    ...
-                                elif attr_name == '3':
-                                    # date
-                                    ...
-                                elif attr_name == '4':
-                                    # description
-                                    ...
+                return expense
+        return None # Expense not found
+
+    def delete_expense(self, expense_id):
+        for expense in self.expenses
+            if expense.id == expense_id:
+                self.expenses.remove(expense)
+                self._save_expenses_to_file()
+                return
+        
+        raise ValueError(f"Expense with ID {expense_id} not found!")
+    
+    def _save_expenses_to_file(self):
+        with open(self.file_path, 'w') as file:
+            json.dump([expense.__dict__ for expense in self.expenses], file, indent=4)

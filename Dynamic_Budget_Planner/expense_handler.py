@@ -12,7 +12,7 @@ from file_handler import read_json, write_json
 import json
 
 class ExpenseEntry():
-    def __init__(self, amount, category, date, id, description):
+    def __init__(self, amount, category, date, id, description=""):
         if not is_valid_amount(amount):
             raise ValueError("Invalid input error! Amount must be +ve")
         if not is_valid_date(date):
@@ -23,10 +23,11 @@ class ExpenseEntry():
             raise ValueError("Invalid category error! Category not allowed")
 
         # Assigning values only after validation
-        self.id = str(uuid.uuid4()) # Generating a unique id for each datapoint
+        self.id = id if id else str(uuid.uuid4()) # Generating a unique id for each datapoint (or) if-else loop to get the available one's
         self.amount = amount
         self.date = date 
         self.category = category
+        self.description = description
         
     def to_dict(self):
         return vars(self)
@@ -41,7 +42,7 @@ class ExpenseManager():
         return [ExpenseEntry(**exp) for exp in raw_data] # converting dict to objs
     
     def save_expenses(self):
-        data = [exp.to_dict for exp in self.expenses]
+        data = [exp.to_dict() for exp in self.expenses]
         write_json(self.file_path, data)
 
     def add_expense(self, expense):
@@ -50,8 +51,20 @@ class ExpenseManager():
             self.save_expenses()
         else:
             raise ValueError("Invalid expense entry!")
-        
-    def get_update_input():
+
+    def list_expenses(self, limit=10):
+        """Showing the most recent expenses to help users with unique ID identification"""
+        print("\nRecent Expenses:")
+        print("-" * 60)
+        print(f"{'ID':<8} | {'Amount':<8} | {'Category':<15} | {'Date':<12} | {'Description'}")
+        print("-" * 60)
+
+        for exp in self.expenses[-limit:]:
+            print(f"{exp.id[:6]:<8} | {exp.amount:<8} | {exp.category:<15} | {exp.date:<12} | {exp.description}")
+
+        print("-" * 60)
+
+    def get_update_input(self):
         expense_id = input("Enter expense_id to update: ")
         fields_to_update = {}
 
@@ -63,7 +76,7 @@ class ExpenseManager():
         while True:
             choice = input("What field do you want to change? ")
             if choice in ['1', 'amount']:
-                new_amount = input(int("Enter new amount "))
+                new_amount = int(input("Enter new amount "))
                 fields_to_update["amount"] = new_amount
             elif choice in ['2', 'category']:
                 print("food", "housing", "transportation", "entertainment", "utilities", "other")            
@@ -94,14 +107,12 @@ class ExpenseManager():
         return None # Expense not found
 
     def delete_expense(self, expense_id):
-        for expense in self.expenses
+        for expense in self.expenses:
             if expense.id == expense_id:
                 self.expenses.remove(expense)
-                self._save_expenses_to_file()
+                self.save_expenses()
                 return
         
         raise ValueError(f"Expense with ID {expense_id} not found!")
     
-    def _save_expenses_to_file(self):
-        with open(self.file_path, 'w') as file:
-            json.dump([expense.__dict__ for expense in self.expenses], file, indent=4)
+    def update_expenses(self):

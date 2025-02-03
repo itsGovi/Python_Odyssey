@@ -60,7 +60,7 @@ def main():
               for expense in manager.expenses:
                     print(expense.to_dict())
         elif choice == '3':
-                  print(coming soon)
+                  print("coming soon")
         elif choice == '4':
               print('Delete feature coming soon!')
         elif choice == '5':

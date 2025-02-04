@@ -39,11 +39,3 @@ def is_valid_category(category, alllowed_categories=None):
 
 def is_valid_description(description):
     return isinstance(description, str) and description.strip != "" #checking it's not empty
-
-if __name__ == "__main__":
-    print(is_valid_amount(100))  # Should return True
-    print(is_valid_amount(-50)) # Should return False
-    print(is_valid_date("2024-12-22"))  # Should return True
-    print(is_valid_date("22-12-2024"))  # Should return False
-    print(is_valid_category("Food", ["Food", "Transport", "Utilities"]))  # Should return True
-    print(is_valid_category("Entertainment", ["Food", "Transport"]))    # Should return False

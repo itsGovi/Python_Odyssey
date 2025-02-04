@@ -100,7 +100,7 @@ class ExpenseManager():
         
         return expense_id, fields_to_update
 
-    def find_expense_by_id(self, expense_id):
+    def find_expense_by_input(self, expense_id):
         for expense in self.expenses:
             if expense.id == expense_id:
                 return expense
@@ -116,3 +116,5 @@ class ExpenseManager():
         raise ValueError(f"Expense with ID {expense_id} not found!")
     
     def update_expenses(self):
+        #still figureing out what to write!
+        ...

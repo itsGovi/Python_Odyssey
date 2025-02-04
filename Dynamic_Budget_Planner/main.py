@@ -38,6 +38,58 @@ def get_user_input():
     
     return validated_data
 
+def get_search_input():
+          
+      search_question = {
+        "1": "ID",
+        "2": "Amount",
+        "3": "Category",
+        "4": "Date",
+        "5": "Description",
+        "6": "Exit"
+      }
+
+      print("\nHow would you like to search:")
+      for key,value in  search_question:
+            print(f"{key}: {value}")
+
+      while True:
+            choice = input("Enter your Choice (1-5): ").strip()
+
+            if choice == "1":
+                  search_value = input("Enter Expense ID: ").strip()
+                  return {"id": search_value}
+            elif choice == "2":
+                  while True:
+                        search_value = input("Enter amount: ").strip()
+                        if is_valid_amount(search_value):
+                              return {"amount": search_value}
+                        else:
+                              print("Invalid amount. Try Again.")
+            elif choice == "3":
+                  while True:
+                        search_value = input("Enter category: ").strip()
+                        if is_valid_category(search_value):
+                              return {"category": search_value}
+                        else:
+                              print("Invalid category. Try Again.")
+            elif choice == "4":
+                  while True:
+                        search_value = input("Enter date (DD-MM-YYYY): ").strip()
+                        if is_valid_date(search_value):
+                              return {"date": search_value}
+                        else:
+                              print("Invalid date. Try Again.")
+            elif choice == "5":
+                  search_value = input("Enter description keyword: ").strip()
+                  return{"Description:": search_value}
+            elif choice == "6":
+                  print("See Ya!")
+                  break
+
+            else:
+                  print("Invalid choice. Please select a number 1-6.")
+
 def main():
     manager = ExpenseManager()
 
